@@ -1,0 +1,137 @@
+<h2>Lista de Doctores</h2>
+
+<div class="buscador-contenedor">
+  <input
+    class="buscador"
+    type="text"
+    placeholder="🔎 Buscar doctor por ID..."
+    [(ngModel)]="busqueda"
+    (input)="buscar()"
+  />
+</div>
+
+<div class="acciones">
+  <button type="button" (click)="activarAgregar()">Agregar doctor</button>
+  <button type="button" (click)="activarEditar()">Editar doctor</button>
+</div>
+
+<!-- Editar por ID-->
+@if (modo === 'editar') {
+  <div class="formulario">
+    <input
+      #inputIdEditar
+      type="text"
+      placeholder="ID del doctor"
+      [value]="idEditar"
+      (input)="idEditar = inputIdEditar.value"
+      (keyup.enter)="cargarPorId(inputIdEditar.value)"
+    />
+
+    <button
+      type="button"
+      (click)="cargarPorId(inputIdEditar.value)"
+    >
+      Cargar datos
+    </button>
+
+    <button type="button" class="cancelar" (click)="cancelar()">
+      Cancelar
+    </button>
+  </div>
+}
+
+
+<!-- Formularios -->
+@if (modo === 'agregar' || modo === 'editarFormulario') {
+  <div class="formulario">
+
+    <input type="text" placeholder="Nombre" [(ngModel)]="form.name" />
+    <input type="text" placeholder="Apellido" [(ngModel)]="form.lastName" />
+    <input type="text" placeholder="Género" [(ngModel)]="form.gender" />
+    <input type="text" placeholder="Dirección" [(ngModel)]="form.address" />
+
+    <button type="button" (click)="guardar()">
+      {{ modo === 'agregar' ? 'Guardar' : 'Actualizar' }}
+    </button>
+
+    <button type="button" class="cancelar" (click)="cancelar()">Cancelar</button>
+
+  </div>
+}
+
+
+
+<!-- Busqueda -->
+@if (busqueda.trim() !== '') {
+
+  <h3 class="result-title">Resultado de búsqueda</h3>
+
+  @if (doctorsBuscado$ | async; as emp) {
+
+    <div class="container">
+      <div class="card">
+
+        <h3>{{ emp.name || 'Departamento' }}</h3>
+
+        <div class="info">
+          @for (item of emp | keyvalue; track item.key) {
+            <p>
+              <strong>{{ item.key.toString() | titlecase }}:</strong>
+              {{ item.value }}
+            </p>
+          }
+        </div>
+
+                  <button
+            class="btn btn-danger eliminar-btn"
+            (click)="emp.id && eliminar(emp.id)">
+            Eliminar
+          </button>
+
+      </div>
+    </div>
+
+  } @else {
+    <p class="error">No hay resultados</p>
+  }
+
+}
+
+
+<!-- Lista -->
+@else {
+
+  @if (doctors$ | async; as doctors) {
+
+    <p class="total">Total Doctores: {{ doctors.length }}</p>
+
+    <div class="container">
+      @for (dep of doctors; track dep.id) {
+
+        <div class="card">
+
+          <h3>{{ dep.name || 'Departamento' }}</h3>
+
+          <div class="info">
+            @for (item of dep | keyvalue; track item.key) {
+              <p>
+                <strong>{{ item.key.toString() | titlecase }}:</strong>
+                {{ item.value }}
+              </p>
+            }
+          </div>
+
+          <button
+            class="btn btn-danger eliminar-btn"
+            (click)="dep.id && eliminar(dep.id)">
+            Eliminar
+          </button>
+
+        </div>
+
+      }
+    </div>
+
+  }
+
+}

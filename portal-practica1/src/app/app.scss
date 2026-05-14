@@ -1,0 +1,26 @@
+.app-layout {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #2a0f10, #1b356b, #020617);
+  color: #e5e7eb;
+}
+
+.app-content {
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  min-height: calc(100vh - 70px);
+  padding: 32px;
+}
+
+.content-card {
+  width: 95%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 32px;
+  background: rgba(15, 23, 42, 0.85);
+  
+  border-radius: 18px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.35);
+}

@@ -1,0 +1,39 @@
+/* RESET GLOBAL */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background: #121212;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* SCROLLBAR (opcional pro) */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #333;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+button {
+  padding: 10px 18px;
+  border-radius: 8px;
+  border: none;
+  background: blue;
+  color: white;
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.2s;
+}
+
+button:hover {
+  opacity: 0.8;
+}

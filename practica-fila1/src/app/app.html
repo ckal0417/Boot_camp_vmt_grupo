@@ -1,0 +1,27 @@
+<div class="app-layout">
+
+  <main class="app-content">
+    <section class="content-card">
+
+      <h1>Bienvenido</h1>
+      <p>Esta es mi aplicación</p>
+
+      <div class="nav-botones">
+        <button (click)="mostrarPatients()">Pacientes</button>
+        <button (click)="mostrarDoctors()">Doctores</button>
+      </div>
+
+      @if (vista === 'patients') {
+        <app-patients-component></app-patients-component>
+      }
+
+      @if (vista === 'doctors') {
+        <app-doctors-component></app-doctors-component>
+      }
+
+      <router-outlet></router-outlet>
+
+    </section>
+  </main>
+
+</div>

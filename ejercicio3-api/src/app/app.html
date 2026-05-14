@@ -1,0 +1,28 @@
+<div class="app-layout">
+
+  <main class="app-content">
+    <section class="content-card">
+
+      <h1>Bienvenido</h1>
+      <p>Esta es mi aplicación</p>
+
+      <div class="nav-botones">
+        <button (click)="mostrarEmployees()">Empleados</button>
+        <button (click)="mostrarDepartments()">Departamentos</button>
+      </div>
+
+      <!-- CONTENIDO DINÁMICO -->
+      @if (vista === 'employees') {
+        <app-employees-component></app-employees-component>
+      }
+
+      @if (vista === 'departments') {
+        <app-departments-component></app-departments-component>
+      }
+
+      <router-outlet></router-outlet>
+
+    </section>
+  </main>
+
+</div>

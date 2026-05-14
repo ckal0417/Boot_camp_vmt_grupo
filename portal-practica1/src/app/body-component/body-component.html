@@ -1,0 +1,108 @@
+<div class="buscador-contenedor">
+  <input
+    class="buscador"
+    type="text"
+    placeholder="🔎 Buscar materia..."
+    [(ngModel)]="busqueda"
+  />
+
+  @if (busqueda.trim() !== '') {
+    <p class="texto-busqueda">Buscando: {{ busqueda }}</p>
+  }
+</div>
+
+<hr>
+
+@if (busqueda.trim() !== '') {
+
+  <h3>Resultados de búsqueda</h3>
+
+  @for (materia of materiasBuscadas; track materia.nombre) {
+    <div
+      class="materia"
+      [ngClass]="{
+        'aprobada': materia.estado === 'aprobada',
+        'cursando': materia.estado === 'cursando',
+        'reprobada': materia.estado === 'reprobada'
+      }"
+    >
+      <span>
+        {{ materia.nombre }} - {{ materia.creditos }} créditos
+
+        @if (materia.estado) {
+          - {{ materia.estado }}
+        }
+      </span>
+
+      @if (puedeRegistrarse(materia)) {
+        <button (click)="registrarMateria(materia)">
+          @if (materia.estado === 'reprobada') {
+            Volver a registrar
+          } @else {
+            Registrar
+          }
+        </button>
+      } @else if(materia.estado === 'cursando') {
+        <span>Ya registrada</span>
+      }
+    </div>
+  } @empty {
+    <p>No hay resultados</p>
+  }
+
+}
+
+<hr>
+
+<h3>Materias registradas</h3>
+
+@for (materia of materiasRegistradas; track materia.nombre) {
+  <div
+    class="materia"
+    [ngClass]="{
+      'aprobada': materia.estado === 'aprobada',
+      'cursando': materia.estado === 'cursando',
+      'reprobada': materia.estado === 'reprobada'
+    }"
+  >
+    <span>
+      {{ materia.nombre }} - {{ materia.creditos }} créditos
+    </span>
+
+    <select
+      [(ngModel)]="materia.estado"
+      (ngModelChange)="cambiarEstado(materia)"
+    >
+      <option value="cursando">Cursando</option>
+      <option value="aprobada">Aprobada</option>
+      <option value="reprobada">Reprobada</option>
+    </select>
+  </div>
+} @empty {
+  <p>No tienes materias registradas</p>
+}
+
+<hr>
+
+<div class="contador">
+  <p>Registradas: {{ materiasRegistradas.length }}</p>
+  <p>Aprobadas: {{ materiasAprobadas }}</p>
+  <p>Reprobadas: {{ materiasReprobadas }}</p>
+</div>
+
+<div class="barra-container">
+  <div
+    class="barra"
+    [ngStyle]="{ width: porcentajeCreditos + '%' }"
+    [ngClass]="{
+      'rojo': porcentajeCreditos < 40,
+      'naranja': porcentajeCreditos >= 40 && porcentajeCreditos <= 70,
+      'verde': porcentajeCreditos > 70
+    }"
+  >
+    {{ creditos }} / 120 ({{ porcentajeCreditos }}%)
+  </div>
+</div>
+
+<button (click)="sumar()">+10 créditos</button>
+<button (click)="restar()">-10 créditos</button>

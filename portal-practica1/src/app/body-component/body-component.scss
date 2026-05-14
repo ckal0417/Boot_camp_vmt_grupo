@@ -1,0 +1,91 @@
+.materia {
+  padding: 10px;
+  margin: 8px 0;
+  border-radius: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+
+.cursando {
+  background: #d68910;
+  color: white;
+}
+
+.aprobada {
+  background: #1e7e34;
+  color: white;
+}
+
+.reprobada {
+  background: #a71d2a;
+  color: white;
+}
+
+.contador {
+  display: flex;
+  gap: 20px;
+  font-weight: bold;
+}
+
+.barra-container {
+  width: 100%;
+  background: #333;
+  border-radius: 8px;
+  overflow: hidden;
+  margin: 15px 0;
+}
+
+.barra {
+  height: 28px;
+  text-align: center;
+  line-height: 28px;
+  color: white;
+  font-weight: bold;
+}
+
+.rojo {
+  background: red;
+}
+
+.naranja {
+  background: orange;
+}
+
+.verde {
+  background: green;
+}
+
+button,
+select,
+input {
+  padding: 8px;
+  border-radius: 6px;
+}
+.buscador-contenedor {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  margin-bottom: 15px;
+}
+
+.buscador {
+  width: 280px;
+  padding: 10px 14px;
+  border-radius: 10px;
+  border: 1px solid #555;
+  background: #1f1f1f;
+  color: white;
+  outline: none;
+}
+
+.buscador:focus {
+  border-color: #4da3ff;
+}
+
+.texto-busqueda {
+  margin-top: 8px;
+  font-size: 14px;
+  color: #ccc;
+}

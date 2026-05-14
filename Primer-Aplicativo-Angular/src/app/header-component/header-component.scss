@@ -1,0 +1,21 @@
+.header {
+  padding: 16px 32px;
+   background: linear-gradient(135deg, #2a0f10, #1b356b, #020617);
+  border-bottom: 1px solid rgba(148, 163, 184, 0.2);
+}
+.header h1 {
+  font-size: 20px;
+  color: #f8fafc;
+}
+
+
+nav {
+  display: flex;
+  gap: 20px;
+}
+
+nav a {
+  color: #38bdf8;
+  text-decoration: none;
+  font-weight: 600;
+}

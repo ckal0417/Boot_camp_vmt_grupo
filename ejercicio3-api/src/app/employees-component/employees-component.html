@@ -1,0 +1,143 @@
+<h2>Lista de Empleados</h2>
+
+<div class="buscador-contenedor">
+  <input
+    class="buscador"
+    type="text"
+    placeholder="🔎 Buscar empleado por ID..."
+    [(ngModel)]="busqueda"
+    (input)="buscar()"
+  />
+</div>
+
+<div class="acciones">
+  <button type="button" (click)="activarAgregar()">Agregar empleado</button>
+  <button type="button" (click)="activarEditar()">Editar empleado</button>
+</div>
+
+<!-- MODO EDITAR (PEDIR ID) -->
+@if (modo === 'editar') {
+  <div class="formulario">
+    <input
+      #inputIdEditar
+      type="text"
+      placeholder="ID del empleado"
+      [value]="idEditar"
+      (input)="idEditar = inputIdEditar.value"
+      (keyup.enter)="cargarPorId(inputIdEditar.value)"
+    />
+
+    <button
+      type="button"
+      (click)="cargarPorId(inputIdEditar.value)"
+    >
+      Cargar datos
+    </button>
+
+    <button type="button" class="cancelar" (click)="cancelar()">
+      Cancelar
+    </button>
+  </div>
+}
+
+<!-- FORMULARIO AGREGAR / EDITAR -->
+@if (modo === 'agregar' || modo === 'editarFormulario') {
+  <div class="formulario">
+
+    <input type="text" placeholder="Nombre" [(ngModel)]="form.name" />
+    <input type="text" placeholder="Avatar URL" [(ngModel)]="form.avatar" />
+    <input type="text" placeholder="Departamento" [(ngModel)]="form.department" />
+    <input type="email" placeholder="Email" [(ngModel)]="form.email" />
+    <input type="text" placeholder="Teléfono" [(ngModel)]="form.phone" />
+    <input type="text" placeholder="Cargo" [(ngModel)]="form.position" />
+    <input type="number" placeholder="Salario" [(ngModel)]="form.salary" />
+
+    <button type="button" (click)="guardar()">
+      {{ modo === 'agregar' ? 'Guardar' : 'Actualizar' }}
+    </button>
+
+    <button type="button" class="cancelar" (click)="cancelar()">Cancelar</button>
+
+  </div>
+}
+
+<!-- RESULTADO DE BUSQUEDA -->
+@if (busqueda.trim() !== '') {
+
+  <h3 class="result-title">Resultado de búsqueda</h3>
+
+  @if (employeeBuscado$ | async; as emp) {
+
+    <div class="container">
+      <div class="card">
+
+        <div class="avatar" *ngIf="emp?.avatar">
+          <img [src]="emp.avatar" alt="Avatar empleado">
+        </div>
+
+        <h3>{{ emp?.name || 'Empleado' }}</h3>
+
+        <div class="info">
+          @for (item of emp | keyvalue; track item.key) {
+            @if (item.key !== 'avatar') {
+              <p>
+                <strong>{{ item.key.toString() | titlecase }}:</strong>
+                {{ item.value }}
+              </p>
+            }
+          }
+        </div>
+
+      </div>
+    </div>
+
+  } @else {
+    <p class="error">No hay resultados</p>
+  }
+
+}
+
+<!-- LISTA NORMAL -->
+@else {
+
+  @if (employees$ | async; as employees) {
+
+    <p class="total">Total empleados: {{ employees.length }}</p>
+
+    <div class="container">
+      @for (emp of employees; track emp.id) {
+
+
+        <div class="card">
+
+          <div class="avatar" *ngIf="emp.avatar">
+            <img [src]="emp.avatar" alt="Avatar empleado">
+          </div>
+
+          <h3>{{ emp.name || 'Empleado' }}</h3>
+
+          <div class="info">
+            @for (item of emp | keyvalue; track item.key) {
+              @if (item.key !== 'avatar') {
+                <p>
+                  <strong>{{ item.key.toString() | titlecase }}:</strong>
+                  {{ item.value }}
+                </p>
+              }
+            }
+          </div>
+
+
+          <button
+            class="btn btn-danger eliminar-btn"
+            (click)="emp.id && eliminar(emp.id)">
+            Eliminar
+          </button>
+        </div>
+
+      }
+    </div>
+
+  }
+
+}

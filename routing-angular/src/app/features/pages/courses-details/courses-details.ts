@@ -8,9 +8,11 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { CoursesInterface } from '../../interfaces/courses.interface';
+
 @Component({
   selector: 'app-courses-details',
   standalone: true,
+
   imports: [
     CommonModule,
     RouterLink,
@@ -19,12 +21,14 @@ import { CoursesInterface } from '../../interfaces/courses.interface';
     MatChipsModule,
     MatProgressSpinnerModule
   ],
+
   templateUrl: './courses-details.html',
   styleUrls: ['./courses-details.scss'],
 })
-export class CoursesDetails {
-  course$: Observable<CoursesInterface>;
 
+export class CoursesDetails {
+
+  course$: Observable<CoursesInterface>;
   originalOrder = () => 0;
 
   constructor(

@@ -3,25 +3,25 @@ import { Routes } from '@angular/router';
 export const routes: Routes = [
   {
     path: '',
-    redirectTo: 'students',
+    redirectTo: 'chefs',
     pathMatch: 'full',
   },
 
   {
-    path: 'students',
+    path: 'chefs',
     loadChildren: () =>
-      import('./features/routes/students-routes')
+      import('./features/routes/chefs-routes')
         .then(m => m.STUDENTS_ROUTES),
   },
 
   {
-    path: 'courses',
+    path: 'recipes',
     loadChildren: () =>
-      import('./features/routes/courses-routes')
+      import('./features/routes/recipes-routes')
         .then(m => m.COURSES_ROUTES),
   },
   {
     path: '**',
-    redirectTo: 'students'
+    redirectTo: 'chefs'
     }
 ];

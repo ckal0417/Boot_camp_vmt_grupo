@@ -1,0 +1,140 @@
+<h2>Lista de Pacientes</h2>
+
+<div class="buscador-contenedor">
+  <input
+    class="buscador"
+    type="text"
+    placeholder="🔎 Buscar paciente por ID..."
+    [(ngModel)]="busqueda"
+    (input)="buscar()"
+  />
+</div>
+
+<div class="acciones">
+  <button type="button" (click)="activarAgregar()">Agregar paciente</button>
+  <button type="button" (click)="activarEditar()">Editar paciente</button>
+</div>
+
+<!-- Editar por ID-->
+@if (modo === 'editar') {
+  <div class="formulario">
+    <input
+      #inputIdEditar
+      type="text"
+      placeholder="ID del paciente"
+      [value]="idEditar"
+      (input)="idEditar = inputIdEditar.value"
+      (keyup.enter)="cargarPorId(inputIdEditar.value)"
+    />
+
+    <button type="button" (click)="cargarPorId(inputIdEditar.value)">
+      Cargar datos
+    </button>
+
+    <button type="button" class="cancelar" (click)="cancelar()">
+      Cancelar
+    </button>
+  </div>
+}
+
+<!-- Formularios -->
+@if (modo === 'agregar' || modo === 'editarFormulario') {
+  <div class="formulario">
+
+    <input type="text" placeholder="Nombre" [(ngModel)]="form.name" />
+    <input type="text" placeholder="Avatar URL" [(ngModel)]="form.avatar" />
+    <input type="text" placeholder="Teléfono" [(ngModel)]="form.phone" />
+    <input type="number" placeholder="Edad" [(ngModel)]="form.age" />
+
+    <button type="button" (click)="guardar()">
+      {{ modo === 'agregar' ? 'Guardar' : 'Actualizar' }}
+    </button>
+
+    <button type="button" class="cancelar" (click)="cancelar()">Cancelar</button>
+
+  </div>
+}
+
+<!-- Busqueda -->
+@if (busqueda.trim() !== '') {
+
+  <h3 class="result-title">Resultado de búsqueda</h3>
+
+  @if (patientsBuscado$ | async; as emp) {
+
+    <div class="container">
+      <div class="card">
+
+        <div class="avatar" *ngIf="emp.avatar">
+          <img [src]="emp.avatar" alt="Avatar paciente">
+        </div>
+
+        <h3>{{ emp.name || 'Paciente' }}</h3>
+
+        <div class="info">
+          <p><strong>ID:</strong> {{ emp.id }}</p>
+          <p><strong>Name:</strong> {{ emp.name }}</p>
+          <p><strong>Age:</strong> {{ emp.age }}</p>
+          <p><strong>Phone:</strong> {{ emp.phone }}</p>
+          <p><strong>Created At:</strong> {{ emp.createdAt }}</p>
+          <p><strong>Registro:</strong> {{ emp.registro }}</p>
+          <p><strong>Código:</strong> {{ emp.codigo }}</p>
+        </div>
+
+        <button
+            class="btn btn-danger eliminar-btn"
+            (click)="emp.id && eliminar(emp.id)">
+            Eliminar
+          </button>
+
+      </div>
+    </div>
+
+  } @else {
+    <p class="error">No hay resultados</p>
+  }
+
+}
+
+<!-- Lista -->
+@else {
+
+  @if (patients$ | async; as patients) {
+
+    <p class="total">Total pacientes: {{ patients.length }}</p>
+
+    <div class="container">
+      @for (emp of patients; track emp.id) {
+
+        <div class="card">
+
+          <div class="avatar" *ngIf="emp.avatar">
+            <img [src]="emp.avatar" alt="Avatar paciente">
+          </div>
+
+          <h3>{{ emp.name || 'Paciente' }}</h3>
+
+          <div class="info">
+            <p><strong>ID:</strong> {{ emp.id }}</p>
+            <p><strong>Name:</strong> {{ emp.name }}</p>
+            <p><strong>Age:</strong> {{ emp.age }}</p>
+            <p><strong>Phone:</strong> {{ emp.phone }}</p>
+            <p><strong>Created At:</strong> {{ emp.createdAt }}</p>
+            <p><strong>Registro:</strong> {{ emp.registro }}</p>
+            <p><strong>Código:</strong> {{ emp.codigo }}</p>
+          </div>
+
+          <button
+            class="btn btn-danger eliminar-btn"
+            (click)="emp.id && eliminar(emp.id)">
+            Eliminar
+          </button>
+
+        </div>
+
+      }
+    </div>
+
+  }
+
+}

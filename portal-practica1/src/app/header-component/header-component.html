@@ -1,0 +1,18 @@
+<header class="header">
+  <h1>{{app}}</h1>
+
+  <nav>
+    <span [style.color]="conectado ? 'green' : 'gray'">
+        {{nombre}}
+    </span>
+
+
+    <a>
+      <button (click)="conectado = !conectado">
+        {{ conectado ? 'Desconectar' : 'Conectar' }}
+      </button>
+    </a>
+
+
+  </nav>
+</header>
