@@ -1,0 +1,66 @@
+h2 {
+  text-align: center;
+  font-family: 'Great Vibes', cursive;
+}
+
+p {
+  text-align: center;
+  font-size: 18px;
+}
+
+.count mat-card {
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: none;
+  background-color: transparent;
+  margin: 10px 10px;
+
+}
+
+.recipes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+}
+
+
+
+.whatch-icon:hover {
+  color: #3f51b5;
+  transform: scale(1.15);
+  transition: 0.2s;
+}
+
+
+
+.edit-icon:hover {
+  color: #3f51b5;
+  transform: scale(1.15);
+  transition: 0.2s;
+}
+
+
+.delete-icon:hover {
+  color: #e0e0e0;
+  transform: scale(1.15);
+  
+}
+
+.whatch-button, .edit-button {
+
+  background-color: #e0e0e0;
+  
+}
+.delete-button:hover {
+
+  background-color: #ff5252;
+  
+}
+mat-card-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 2px;
+  
+}

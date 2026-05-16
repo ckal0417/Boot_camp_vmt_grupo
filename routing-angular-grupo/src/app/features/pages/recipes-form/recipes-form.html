@@ -1,0 +1,43 @@
+<form [formGroup]="recipeForm">
+
+  <mat-form-field appearance="outline">
+
+    <mat-label>Name</mat-label>
+
+    <input
+      matInput
+      formControlName="name"
+    />
+
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+
+    <mat-label>Description</mat-label>
+
+    <input matInput formControlName="description"/>
+
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+
+    <mat-label>Country</mat-label>
+
+    <input matInput formControlName="country"/>
+
+  </mat-form-field>
+
+  <mat-card-actions>
+    <button
+      mat-flat-button
+      (click)="cancel()">Cancel
+    </button>
+
+    <button
+      mat-raised-button
+      (click)="save()">Save
+    </button>
+
+  </mat-card-actions>
+
+</form>

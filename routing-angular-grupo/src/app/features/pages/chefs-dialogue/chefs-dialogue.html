@@ -1,0 +1,29 @@
+<h2 mat-dialog-title>
+  Delete Chef
+</h2>
+
+<mat-dialog-content>
+
+  <p>
+    ¿Estás seguro de eliminar este chef:
+      <br>
+      <strong>
+        {{ data.name }}
+      </strong>?
+  </p>
+
+</mat-dialog-content>
+
+<mat-dialog-actions align="center">
+
+  <button
+    mat-flat-button
+    (click)="cancel()"> Cancel
+  </button>
+
+  <button
+    mat-raised-button
+    (click)="confirm()"> Delete
+  </button>
+
+</mat-dialog-actions>

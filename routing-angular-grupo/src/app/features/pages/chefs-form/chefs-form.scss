@@ -1,0 +1,25 @@
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  padding: 25px;
+  min-width: 350px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+   
+}
+mat-card-actions {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+}
+mat-form-field {
+
+  width: 100%;
+
+}
+
+button:hover {
+
+  transform: scale(1.03);
+
+}

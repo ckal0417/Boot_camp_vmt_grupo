@@ -1,0 +1,53 @@
+@if (loading()) {
+
+  <mat-spinner></mat-spinner>
+
+} 
+@else {
+  @if (recipe$ | async; as recipe) {
+
+    <mat-card style="margin: 20px">
+
+      <mat-card-header>
+
+        <mat-card-title>
+          {{ recipe.name }}
+        </mat-card-title>
+
+        <mat-card-subtitle>
+          {{ recipe.country }}
+        </mat-card-subtitle>
+
+      </mat-card-header>
+
+      <mat-card-content>
+
+        @for (item of recipe | keyvalue: originalOrder; track item.key) {
+
+          <p>
+            <strong>{{ item.key }}:</strong> {{ item.value }}
+          </p>
+
+        }
+
+      </mat-card-content>
+      
+      <!--regresar-->
+      <mat-card-actions>
+
+        <button
+        
+          mat-flat-button
+          routerLink="/recipes"> <mat-icon>west</mat-icon>Back
+
+        </button>
+
+      </mat-card-actions>
+
+    </mat-card>
+
+  }
+}
+
+
+

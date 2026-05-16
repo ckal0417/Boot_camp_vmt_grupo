@@ -1,0 +1,71 @@
+ @if (loading()) {
+  <mat-spinner></mat-spinner>
+} @else {
+
+  @if (chefs$ | async; as chefs) {
+    <div class="count">
+      <mat-card>
+        <h2>Total Chefs: {{ chefs.length }}</h2>
+
+        <!--Añadir-->
+        <button 
+          mat-fab extended class="add-button"
+          (click)="openCreateDialog()">
+          <mat-icon>add</mat-icon> <p> ADD</p>
+        </button>
+
+      </mat-card>
+    </div>
+
+    
+    <div class="chefs-grid">
+      @for (chef of chefs; track chef.id) {
+
+        <mat-card style="margin: 10px">
+
+          <mat-card-header>
+
+            <mat-card-title>{{ chef.name }}</mat-card-title>
+            <mat-card-subtitle>{{ chef.country }} - {{ chef.city }}</mat-card-subtitle>
+
+          </mat-card-header>
+
+          <mat-card-actions>
+
+            <!-- VER -->
+            <button
+              mat-icon-button class="whatch-button"
+              [routerLink]="['/chefs', chef.id]">
+
+              <mat-icon class="whatch-icon">visibility</mat-icon>
+
+            </button>
+
+            <!-- EDITAR -->
+            <button
+              mat-icon-button class="edit-button"
+              (click)="openEditDialog(chef)">
+
+              <mat-icon class="edit-icon">edit</mat-icon>
+
+            </button>
+
+            <!-- ELIMINAR -->
+            <button
+              mat-icon-button class="delete-button"
+              (click)="openDeleteDialog(chef)">
+
+              <mat-icon class="delete-icon">delete</mat-icon>
+
+            </button>
+
+          </mat-card-actions>
+
+        </mat-card>
+
+      }
+    </div>
+
+  }
+
+}
